@@ -38,7 +38,7 @@ def modify_feed():
     new_state = request.args.get('isStreaming')
     if (not camera_streaming) and new_state:
         webcam.start()
-    else if camera_streaming and (not new_state):
+    elif camera_streaming and (not new_state):
         webcam.release()
     camera_streaming = new_state
     response = jsonify(success=True)
