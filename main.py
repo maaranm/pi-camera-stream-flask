@@ -20,7 +20,6 @@ def gen(camera):
     #get camera frame
     while True:
         if camera_streaming == 'True':
-            print('brooo')
             frame = camera.get_frame()
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
@@ -30,22 +29,18 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    print('vbrrrr')
-    print(camera_streaming)
     return Response(gen(webcam),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/modify_feed', methods=['POST'])
 def modify_feed():
-    if not request.json:
-        print('fuck')
     global camera_streaming
     global cam_type
     new_state = request.args.get('isStreaming')
     new_cam = request.args.get('camType')
     
     if (cam_type != new_cam):
-        webcam = VideoCamera(cam_type)
+        webcam = VideoCamera(new_cam)
     
     if (camera_streaming != 'True') and (new_state == 'True'):
         webcam.start()
