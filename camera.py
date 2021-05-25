@@ -21,9 +21,9 @@ class VideoCamera(object):
 
     def release(self):
     	if self.cam_type == 'pi':
-            self.vs.stop()
-        else:
-            self.vs.release()
+    		self.vs.stop()
+    	else:
+    		self.vs.release()
 
     def start(self):
         if self.cam_type == 'pi':
