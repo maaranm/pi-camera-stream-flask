@@ -40,6 +40,7 @@ def modify_feed():
     new_cam = request.args.get('camType')
     
     if (cam_type != new_cam):
+        webcam.release()
         webcam = VideoCamera(new_cam)
     
     if (camera_streaming != 'True') and (new_state == 'True'):
