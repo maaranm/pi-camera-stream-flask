@@ -9,7 +9,7 @@ import numpy as np
 
 class VideoCamera(object):
     def __init__(self, flip = False):
-        self.vs = cv2.VideoCapture(1)
+        self.vs = cv2.VideoCapture(0)
         self.flip = flip
         time.sleep(2.0)
 
