@@ -41,6 +41,7 @@ def modify_feed():
     new_cam = request.args.get('camType')
     
     if (cam_type != new_cam):
+        print('bam')
         webcam.release()
         webcam = VideoCamera(new_cam)
     
