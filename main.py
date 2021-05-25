@@ -33,9 +33,9 @@ def modify_feed():
         print('fuck')
     camera_streaming = request.args.get('isStreaming')
     if camera_streaming:
-        camera.start()
+        webcam.start()
     else:
-        camera.release()
+        webcam.release()
     
 
 if __name__ == '__main__':
