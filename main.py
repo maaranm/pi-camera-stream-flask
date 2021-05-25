@@ -4,12 +4,13 @@ import time
 import threading
 import os
 
-webcam = VideoCamera('web')
-
 # App Globals (do not edit)
 app = Flask(__name__)
 
 camera_streaming = 'True'
+cam_type = 'web'
+
+webcam = VideoCamera(cam_type)
 
 @app.route('/')
 def index():
@@ -40,12 +41,18 @@ def modify_feed():
         print('fuck')
     global camera_streaming
     new_state = request.args.get('isStreaming')
+    new_cam = request.args.get('camType')
+    
+    if (cam_type != new_cam):
+        webcam = VideoCamera(cam_type)
+    
     if (camera_streaming != 'True') and (new_state == 'True'):
         webcam.start()
     elif (camera_streaming == 'True') and (new_state != 'True'):
         webcam.release()
+
     camera_streaming = new_state
-    print(camera_streaming)
+    cam_type = new_cam
     response = jsonify(success=True)
     return response
     
