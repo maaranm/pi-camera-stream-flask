@@ -4,7 +4,7 @@ import time
 import threading
 import os
 
-webcam = VideoCamera()
+webcam = VideoCamera('web')
 
 # App Globals (do not edit)
 app = Flask(__name__)
