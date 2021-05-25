@@ -35,11 +35,12 @@ def video_feed():
 def modify_feed():
     if not request.json:
         print('fuck')
-    camera_streaming = request.args.get('isStreaming')
-    if camera_streaming:
+    new_state = request.args.get('isStreaming')
+    if (not camera_streaming) and new_state:
         webcam.start()
-    else:
+    else if camera_streaming and (not new_state):
         webcam.release()
+    camera_streaming = new_state
     response = jsonify(success=True)
     return response
     
