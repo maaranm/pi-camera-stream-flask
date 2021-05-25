@@ -32,7 +32,10 @@ def modify_feed():
     if not request.json:
         print('fuck')
     camera_streaming = request.args.get('isStreaming')
-    print(camera_streaming)
+    if camera_streaming:
+        camera.start()
+    else:
+        camera.release()
     
 
 if __name__ == '__main__':
