@@ -7,6 +7,7 @@ import numpy as np
 class VideoCamera(object):
     def __init__(self, type):
         self.cam_type = type
+        print(self.cam_type)
         if self.cam_type == 'pi':
             self.vs = PiVideoStream().start()
         else:
