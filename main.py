@@ -18,7 +18,7 @@ def index():
 def gen(camera):
     #get camera frame
     while True:
-        if camera_streaming:
+        if camera_streaming == 'True':
             print('brooo')
             frame = camera.get_frame()
             yield (b'--frame\r\n'
@@ -40,9 +40,9 @@ def modify_feed():
         print('fuck')
     global camera_streaming
     new_state = request.args.get('isStreaming')
-    if (not camera_streaming) and new_state:
+    if (camera_streaming != 'True') and (new_state == 'True'):
         webcam.start()
-    elif camera_streaming and (not new_state):
+    elif (camera_streaming == 'True') and (new_state != 'True'):
         webcam.release()
     camera_streaming = new_state
     print(camera_streaming)
