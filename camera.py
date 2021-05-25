@@ -3,14 +3,13 @@
 #Desc: This scrtipt script..
 
 import cv2
-from imutils.video.pivideostream import PiVideoStream
 import imutils
 import time
 import numpy as np
 
 class VideoCamera(object):
     def __init__(self, flip = False):
-        self.vs = PiVideoStream().start()
+        self.vs = cv2.VideoCapture(1)
         self.flip = flip
         time.sleep(2.0)
 
@@ -23,6 +22,6 @@ class VideoCamera(object):
         return frame
 
     def get_frame(self):
-        frame = self.flip_if_needed(self.vs.read())
+        _, frame = self.vs.read()
         ret, jpeg = cv2.imencode('.jpg', frame)
         return jpeg.tobytes()
