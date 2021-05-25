@@ -40,6 +40,7 @@ def modify_feed():
     if not request.json:
         print('fuck')
     global camera_streaming
+    global cam_type
     new_state = request.args.get('isStreaming')
     new_cam = request.args.get('camType')
     
