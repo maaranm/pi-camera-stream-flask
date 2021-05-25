@@ -12,10 +12,6 @@ cam_type = 'web'
 
 webcam = VideoCamera(cam_type)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
 #helper function to get camera frame or empty frame depending on streaming state
 def gen(camera):
     #get camera frame
