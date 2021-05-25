@@ -42,6 +42,7 @@ def modify_feed():
     elif camera_streaming and (not new_state):
         webcam.release()
     camera_streaming = new_state
+    print(camera_streaming)
     response = jsonify(success=True)
     return response
     
