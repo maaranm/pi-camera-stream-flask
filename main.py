@@ -1,15 +1,10 @@
-#Modified by smartbuilds.io
-#Date: 27.09.20
-#Desc: This web application serves a motion JPEG stream
-# main.py
-# import the necessary packages
 from flask import Flask, render_template, Response, request
 from camera import VideoCamera
 import time
 import threading
 import os
 
-pi_camera = VideoCamera(flip=False) # flip pi camera if upside down.
+webcam = VideoCamera(flip=False)
 
 # App Globals (do not edit)
 app = Flask(__name__)
@@ -27,7 +22,7 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(pi_camera),
+    return Response(gen(webcam),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
