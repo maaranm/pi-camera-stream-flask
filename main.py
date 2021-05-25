@@ -4,9 +4,9 @@ import time
 import threading
 import os
 
-# App Globals (do not edit)
 app = Flask(__name__)
 
+#global variables to track if currently streaming and current camera type
 camera_streaming = 'True'
 cam_type = 'web'
 
@@ -14,8 +14,9 @@ webcam = VideoCamera(cam_type)
 
 @app.route('/')
 def index():
-    return render_template('index.html') #you can customze index.html here
+    return render_template('index.html')
 
+#helper function to get camera frame or empty frame depending on streaming state
 def gen(camera):
     #get camera frame
     while True:
@@ -27,31 +28,37 @@ def gen(camera):
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + b'\r\n\r\n')
 
+            #end point for video feed
 @app.route('/video_feed')
 def video_feed():
     return Response(gen(webcam),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+#post endpoint for modifying streaming settings
 @app.route('/modify_feed', methods=['POST'])
 def modify_feed():
     global camera_streaming
     global cam_type
     global webcam
+    #current post request parameters
     new_state = request.args.get('isStreaming')
     new_cam = request.args.get('camType')
     
+    #change camera type between usb webcam and pi cam
     if (cam_type != new_cam):
-        print('bam')
         webcam.release()
         webcam = VideoCamera(new_cam)
     
+    #comparing to string literals because python bool cast just converts any non-empty string to true
     if (camera_streaming != 'True') and (new_state == 'True'):
         webcam.start()
     elif (camera_streaming == 'True') and (new_state != 'True'):
         webcam.release()
 
+    #update global variables
     camera_streaming = new_state
     cam_type = new_cam
+    #return success resupsonse
     response = jsonify(success=True)
     return response
     
