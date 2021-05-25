@@ -11,6 +11,12 @@ class VideoCamera(object):
     def __del__(self):
         self.vs.stop()
 
+    def release(self):
+    	self.vs.release()
+
+    def start(self):
+    	self.vs = cv2.VideoCapture(0)
+
     def get_frame(self):
         _, frame = self.vs.read()
         ret, jpeg = cv2.imencode('.jpg', frame)
