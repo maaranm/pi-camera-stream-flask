@@ -31,7 +31,6 @@ def video_feed():
 def modify_feed():
     if not request.json:
         print('fuck')
-        abort(400)
     camera_streaming = request.json('isStreaming')
     if camera_streaming:
         camera.start()
