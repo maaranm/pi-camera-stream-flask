@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, jsonify
 from camera import VideoCamera
 import time
 import threading
@@ -17,10 +17,14 @@ def index():
 
 def gen(camera):
     #get camera frame
-    while camera_streaming:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    while True:
+        if camera_streaming:
+            frame = camera.get_frame()
+            yield (b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+        else:
+            yield (b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + b'\r\n\r\n')
 
 @app.route('/video_feed')
 def video_feed():
@@ -36,6 +40,8 @@ def modify_feed():
         webcam.start()
     else:
         webcam.release()
+    response = jsonify(success=True)
+    return response
     
 
 if __name__ == '__main__':
