@@ -28,6 +28,8 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
+    print('vbrrrr')
+    print(camera_streaming)
     return Response(gen(webcam),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
