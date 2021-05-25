@@ -9,7 +9,7 @@ webcam = VideoCamera()
 # App Globals (do not edit)
 app = Flask(__name__)
 
-camera_streaming = True
+camera_streaming = 'True'
 
 @app.route('/')
 def index():
