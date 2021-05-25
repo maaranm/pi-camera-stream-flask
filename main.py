@@ -35,6 +35,7 @@ def video_feed():
 def modify_feed():
     if not request.json:
         print('fuck')
+    global camera_streaming
     new_state = request.args.get('isStreaming')
     if (not camera_streaming) and new_state:
         webcam.start()
