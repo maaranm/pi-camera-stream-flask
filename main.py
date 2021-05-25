@@ -36,6 +36,7 @@ def video_feed():
 def modify_feed():
     global camera_streaming
     global cam_type
+    global webcam
     new_state = request.args.get('isStreaming')
     new_cam = request.args.get('camType')
     
