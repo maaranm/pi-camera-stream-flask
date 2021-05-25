@@ -31,7 +31,7 @@ def video_feed():
 def modify_feed():
     if not request.json:
         print('fuck')
-    camera_streaming = request.args
+    camera_streaming = request.args.get('isStreaming')
     print(camera_streaming)
     
 
