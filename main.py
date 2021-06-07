@@ -56,6 +56,7 @@ def modify_feed():
     cam_type = new_cam
     #return success resupsonse
     response = jsonify(success=True)
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
     
 
