@@ -47,9 +47,9 @@ def modify_feed():
     new_cam = request.args.get('camType')
     
     #change camera type between usb webcam and pi cam
-#    if (cam_type != new_cam):
-#        webcam.release()
-#        webcam = VideoCamera(new_cam)
+    if (cam_type != new_cam):
+        webcam.release()
+        webcam = VideoCamera(new_cam)
     
     #comparing to string literals because python bool cast just converts any non-empty string to true
     if (camera_streaming != 'True') and (new_state == 'True'):
