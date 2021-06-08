@@ -1,4 +1,5 @@
 from flask import Flask, render_template, Response, request, jsonify
+import numpy as np
 from camera import VideoCamera
 import time
 import threading
@@ -21,8 +22,12 @@ def gen(camera):
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
         else:
+            blankFrame = np.zeros([100,100,3],dtype=np..uint8)
+            blankFrame.fill(255)
+            ret, jpeg = cv2.imencode('.jpg', frame)
+            frame = jpeg.tobytes()
             yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + b'\r\n\r\n')
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
             #end point for video feed
 @app.route('/video_feed')
