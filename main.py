@@ -25,7 +25,7 @@ def gen(camera):
         else:
             blankFrame = np.zeros([100,100,3],dtype=np.uint8)
             blankFrame.fill(255)
-            ret, jpeg = cv2.imencode('.jpg', frame)
+            ret, jpeg = cv2.imencode('.jpg', blankFrame)
             frame = jpeg.tobytes()
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
