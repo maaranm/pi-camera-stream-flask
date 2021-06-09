@@ -51,7 +51,7 @@ def modify_feed():
     new_cam = request.args.get('camType')
     
     #change camera type between usb webcam and pi cam
-    if (cam_type != new_cam):
+    if (new_cam != 'True' and cam_type != new_cam):
         if(webcam != None):
             webcam.release()
         webcam = VideoCamera(new_cam)
