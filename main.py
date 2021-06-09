@@ -11,7 +11,7 @@ app = Flask(__name__)
 #global variables to track if currently streaming and current camera type
 camera_streaming = 'True'
 cam_type = 'pi'
-global webcam
+webcam = None
 try:
     webcam = VideoCamera(cam_type)
     print('success')
@@ -52,7 +52,8 @@ def modify_feed():
     
     #change camera type between usb webcam and pi cam
     if (cam_type != new_cam):
-        webcam.release()
+        if(webcam == None):
+            webcam.release()
         webcam = VideoCamera(new_cam)
     
     #comparing to string literals because python bool cast just converts any non-empty string to true
