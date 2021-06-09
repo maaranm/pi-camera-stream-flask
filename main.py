@@ -12,7 +12,10 @@ app = Flask(__name__)
 camera_streaming = 'True'
 cam_type = 'web'
 
-webcam = VideoCamera(cam_type)
+try:
+    webcam = VideoCamera(cam_type)
+except:
+    camera_streaming = 'False'
 
 blankImg = cv2.imread('placeholder.jpg')
 blankFrame = blankImg.tobytes()
