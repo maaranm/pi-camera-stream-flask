@@ -11,13 +11,7 @@ app = Flask(__name__)
 #global variables to track if currently streaming and current camera type
 camera_streaming = 'True'
 cam_type = 'pi'
-try:
-    global webcam
-    webcam = VideoCamera(cam_type)
-    print('success')
-except:
-    camera_streaming = 'False'
-    print('fail')
+webcam = VideoCamera(cam_type)
 
 blankImg = cv2.imread('placeholder.jpg')
 blankFrame = blankImg.tobytes()
