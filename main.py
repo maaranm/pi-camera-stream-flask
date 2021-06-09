@@ -14,8 +14,10 @@ cam_type = 'pi'
 
 try:
     webcam = VideoCamera(cam_type)
+    print('success')
 except:
     camera_streaming = 'False'
+    print('fail')
 
 blankImg = cv2.imread('placeholder.jpg')
 blankFrame = blankImg.tobytes()
