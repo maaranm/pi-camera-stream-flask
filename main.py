@@ -11,16 +11,24 @@ app = Flask(__name__)
 #global variables to track if currently streaming and current camera type
 camera_streaming = 'True'
 cam_type = 'pi'
-webcam = VideoCamera(cam_type)
+
+try:
+    global webcam
+    webcam = VideoCamera(cam_type)
+    print('success')
+except:
+    camera_streaming = 'False'
+    print('fail')
 
 blankImg = cv2.imread('placeholder.jpg')
 blankFrame = blankImg.tobytes()
 #helper function to get camera frame or empty frame depending on streaming state
-def gen(camera):
+def gen():
     #get camera frame
     while True:
         if camera_streaming == 'True':
-            frame = camera.get_frame()
+            global webcam
+            frame = webca,=m.get_frame()
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
         else:
@@ -30,7 +38,7 @@ def gen(camera):
             #end point for video feed
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(webcam),
+    return Response(gen(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 #post endpoint for modifying streaming settings
