@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, request, jsonify
+efrom flask import Flask, render_template, Response, request, jsonify
 import numpy as np
 import cv2
 from camera import VideoCamera
@@ -11,8 +11,9 @@ app = Flask(__name__)
 #global variables to track if currently streaming and current camera type
 camera_streaming = 'True'
 cam_type = 'pi'
-
+webcam = None
 try:
+    global webcam
     webcam = VideoCamera(cam_type)
     print('success')
 except:
