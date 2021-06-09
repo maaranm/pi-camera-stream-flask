@@ -27,7 +27,7 @@ def gen():
     while True:
         if camera_streaming == 'True':
             global webcam
-            frame = webca,=m.get_frame()
+            frame = webcam.get_frame()
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
         else:
