@@ -14,6 +14,8 @@ cam_type = 'web'
 
 webcam = VideoCamera(cam_type)
 
+blankImg = cv2.imread('placeholder.jpg')
+blankFrame = blankImg.tobytes()
 #helper function to get camera frame or empty frame depending on streaming state
 def gen(camera):
     #get camera frame
@@ -23,12 +25,8 @@ def gen(camera):
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
         else:
-            blankFrame = np.zeros([100,100,3],dtype=np.uint8)
-            blankFrame.fill(255)
-            ret, jpeg = cv2.imencode('.jpg', blankFrame)
-            frame = jpeg.tobytes()
             yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+                b'Content-Type: image/jpeg\r\n\r\n' + blankFrame + b'\r\n\r\n')
 
             #end point for video feed
 @app.route('/video_feed')
