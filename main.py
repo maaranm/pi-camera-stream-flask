@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 #global variables to track if currently streaming and current camera type
 camera_streaming = 'True'
-cam_type = 'web'
+cam_type = 'pi'
 
 try:
     webcam = VideoCamera(cam_type)
