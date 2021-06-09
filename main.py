@@ -1,4 +1,4 @@
-efrom flask import Flask, render_template, Response, request, jsonify
+from flask import Flask, render_template, Response, request, jsonify
 import numpy as np
 import cv2
 from camera import VideoCamera
