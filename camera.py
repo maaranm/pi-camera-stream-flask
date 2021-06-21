@@ -12,8 +12,8 @@ class VideoCamera(object):
             self.vs = PiVideoStream().start()
         else:
             self.vs = cv2.VideoCapture(0)
-            self.vs.set(3, 1280)
-            self.vs.set(4, 720)
+            self.vs.set(3, 640)
+            self.vs.set(4, 480)
         time.sleep(2.0)
 
     def __del__(self):
@@ -33,8 +33,8 @@ class VideoCamera(object):
             self.vs = PiVideoStream().start()
         else:
             self.vs = cv2.VideoCapture(0)
-            self.vs.set(3, 1280)
-            self.vs.set(4, 720)
+            self.vs.set(3, 640)
+            self.vs.set(4, 480)
 
     def get_frame(self):
         if self.cam_type == 'pi':
