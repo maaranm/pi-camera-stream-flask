@@ -32,7 +32,7 @@ class VideoCamera(object):
         if self.cam_type == 'pi':
             self.vs = PiVideoStream().start()
         else:
-    	    self.vs = cv2.VideoCapture(0)
+            self.vs = cv2.VideoCapture(0)
             self.vs.set(3, 1280)
             self.vs.set(4, 720)
 
